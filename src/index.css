@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=DM+Mono:wght@400;500&family=Syne:wght@700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=DM+Mono:wght@400;500&family=Syne:wght@700;800;900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -12,35 +12,68 @@
 
 body {
   font-family: 'Inter', sans-serif;
-  background: #050507;
-  color: white;
+  background-color: #FAF8FF;
+  color: #09090b;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 :root {
-  color-scheme: dark;
+  color-scheme: light;
 }
 
+/* Brutalist Dot Pattern Background */
+.bg-brutalist-dots {
+  background-color: #FAF8FF;
+  background-image: radial-gradient(#cbd5e1 1.5px, transparent 1.5px);
+  background-size: 24px 24px;
+}
+
+/* Brutalist Grid Pattern Background */
+.bg-brutalist-grid {
+  background-color: #FAF8FF;
+  background-image: 
+    linear-gradient(to right, rgba(124, 58, 237, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(124, 58, 237, 0.06) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+/* Light Neobrutalist Scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 8px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #0C0C12;
+  background: #F3E8FF;
+  border-left: 2px solid #000000;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #27273a;
+  background: #7c3aed;
+  border: 2px solid #000000;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
+  background: #6d28d9;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #F4F4F5;
+  border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
   background: #7c3aed;
+  border-radius: 4px;
 }
 
 ::selection {
-  background: rgba(168, 85, 247, 0.4);
-  color: #ffffff;
+  background: #DDD6FE;
+  color: #581C87;
 }
