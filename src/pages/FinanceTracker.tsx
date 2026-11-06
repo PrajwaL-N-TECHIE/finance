@@ -83,6 +83,7 @@ const FinanceTracker = () => {
 
   // Sidebar
   const [sidebarHovered, setSidebarHovered] = useState(false);
+  const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
   const scrollTo = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -717,13 +718,13 @@ const FinanceTracker = () => {
   // VIEW: DASHBOARD
   // ==========================================
   return (
-    <div className="flex h-screen w-screen overflow-hidden bg-[#FAF8FF] text-zinc-900">
+    <div className="flex h-screen w-screen overflow-hidden bg-[#FAF8FF] text-zinc-900 relative">
 
       {/* SIDEBAR */}
       <aside
         onMouseEnter={() => setSidebarHovered(true)}
         onMouseLeave={() => setSidebarHovered(false)}
-        className={`shrink-0 h-screen bg-white border-r border-zinc-200 flex flex-col transition-all duration-200 overflow-hidden ${
+        className={`hidden md:flex shrink-0 h-screen bg-white border-r border-zinc-200 flex-col transition-all duration-200 overflow-hidden ${
           sidebarHovered ? 'w-52' : 'w-14'
         }`}
       >
@@ -776,33 +777,36 @@ const FinanceTracker = () => {
       <div className="flex-1 flex flex-col h-screen overflow-hidden">
 
         {/* Top Bar */}
-        <header className="shrink-0 h-11 bg-white border-b border-zinc-200 flex items-center justify-between px-4">
+        <header className="shrink-0 bg-white border-b border-zinc-200 flex items-center justify-between px-4 h-12">
           <div className="flex items-center gap-2">
-            <img src="/logo.png" alt="Buildicy" className="w-5 h-5 rounded object-contain" />
-            <span className="text-xs font-bold text-zinc-800 uppercase tracking-wider">Finance Dashboard</span>
-            <span className="text-[10px] font-medium text-zinc-400">· Buildicy Revenue Ledger</span>
+            <img src="/logo.png" alt="Buildicy" className="w-6 h-6 rounded object-contain" />
+            <span className="text-xs font-black text-zinc-800 uppercase tracking-wider font-syne">Finance</span>
+            <span className="hidden sm:inline text-[10px] font-medium text-zinc-400">· Buildicy</span>
           </div>
           <div className="flex items-center gap-2">
             <div className="flex bg-zinc-100 rounded-lg p-0.5">
               {(['all','year','month'] as const).map(tf => (
-                <button key={tf} onClick={() => setTimeframe(tf)} className={`px-2.5 py-1 rounded-md text-[10px] font-semibold uppercase cursor-pointer transition-colors ${ timeframe === tf ? 'bg-white text-purple-700 shadow-sm font-bold' : 'text-zinc-400 hover:text-zinc-700'}`}>
-                  {tf === 'all' ? 'All' : tf === 'year' ? 'Year' : 'Month'}
+                <button key={tf} onClick={() => setTimeframe(tf)} className={`px-2 py-1 rounded-md text-[10px] font-semibold uppercase cursor-pointer transition-colors ${ timeframe === tf ? 'bg-white text-purple-700 shadow-sm font-bold' : 'text-zinc-400 hover:text-zinc-700'}`}>
+                  {tf === 'all' ? 'All' : tf === 'year' ? 'YR' : 'MO'}
                 </button>
               ))}
             </div>
-            <select value={filterCategory} onChange={(e) => setFilterCategory(e.target.value)} className="bg-zinc-100 rounded-lg px-2 py-1 text-[10px] font-semibold focus:outline-none cursor-pointer text-zinc-600 border-0">
-              <option value="All">All Categories</option>
+            <select value={filterCategory} onChange={(e) => setFilterCategory(e.target.value)} className="hidden sm:block bg-zinc-100 rounded-lg px-2 py-1 text-[10px] font-semibold focus:outline-none cursor-pointer text-zinc-600 border-0">
+              <option value="All">All</option>
               <optgroup label="Income">{CATEGORIES.credit.map(c => <option key={c} value={c}>{c}</option>)}</optgroup>
               <optgroup label="Expenses">{CATEGORIES.debit.map(c => <option key={c} value={c}>{c}</option>)}</optgroup>
             </select>
+            <button onClick={handleOpenAdd} className="md:hidden flex items-center gap-1 px-3 py-1.5 bg-purple-600 text-white rounded-lg text-xs font-black border-2 border-black shadow-[2px_2px_0px_0px_#000] cursor-pointer">
+              <Plus size={12} /> Add
+            </button>
           </div>
         </header>
 
         {/* Scrollable Content */}
-        <main className="flex-1 overflow-y-auto p-4 space-y-4 custom-scrollbar">
+        <main className="flex-1 overflow-y-auto p-3 md:p-4 space-y-3 md:space-y-4 custom-scrollbar pb-20 md:pb-4">
 
         {/* KPI Cards */}
-        <div id="section-kpi" className="grid grid-cols-4 gap-3">
+        <div id="section-kpi" className="grid grid-cols-2 md:grid-cols-4 gap-3">
           <div className="bg-white rounded-xl p-4 shadow-sm border border-zinc-100">
             <div className="flex items-center justify-between mb-2">
               <span className="text-[10px] font-semibold text-zinc-400 uppercase tracking-wider">Net Balance</span>
@@ -838,10 +842,10 @@ const FinanceTracker = () => {
         </div>
 
         {/* Main Grid: Chart + Ledger */}
-        <div id="section-chart" className="grid grid-cols-3 gap-4">
+        <div id="section-chart" className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4">
 
           {/* Trading-style Cash Flow Chart */}
-          <div className="col-span-2 bg-white rounded-xl border-2 border-black shadow-[3px_3px_0px_0px_#000] overflow-hidden">
+          <div className="col-span-1 md:col-span-2 bg-white rounded-xl border-2 border-black shadow-[3px_3px_0px_0px_#000] overflow-hidden">
             {/* Header bar */}
             <div className="flex items-center justify-between px-4 py-2.5 bg-white border-b-2 border-black">
               <div className="flex items-center gap-2">
@@ -922,7 +926,7 @@ const FinanceTracker = () => {
           </div>
 
           {/* Ledger */}
-          <div className="bg-white border-2 border-black rounded-xl p-4 shadow-[2px_2px_0px_0px_#000] flex flex-col h-[300px]">
+          <div className="bg-white border-2 border-black rounded-xl p-4 shadow-[2px_2px_0px_0px_#000] flex flex-col h-[320px] md:h-[300px]">
             <div className="flex items-center justify-between mb-2 shrink-0">
               <h3 className="text-sm font-black text-black font-syne">Ledger</h3>
               <span className="text-[10px] font-black bg-purple-100 text-purple-900 border border-black px-2 py-0.5 rounded-md">{filteredTransactions.length} txns</span>
@@ -963,7 +967,7 @@ const FinanceTracker = () => {
         </div>
 
         {/* Secondary Row: Pie Charts + Margin */}
-        <div className="grid grid-cols-3 gap-4 mb-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4 mb-4">
 
           {/* Income Pie */}
           <div className="bg-white border-2 border-black rounded-xl p-4 shadow-[2px_2px_0px_0px_#000]">
@@ -1069,7 +1073,7 @@ const FinanceTracker = () => {
           </div>
 
           {/* Forecast mini stats */}
-          <div className="grid grid-cols-4 gap-3 mb-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
             <div className="bg-blue-50 border-2 border-black rounded-lg p-3 shadow-[1px_1px_0px_0px_#000]">
               <p className="text-[10px] font-black text-blue-800 uppercase mb-1">Avg Monthly In</p>
               <p className="text-sm font-black text-black font-mono">{formatCurrency(avgMonthlyIncome)}</p>
@@ -1140,6 +1144,32 @@ const FinanceTracker = () => {
 
         </main>
       </div>
+
+      {/* MOBILE BOTTOM NAV */}
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white border-t-2 border-black flex items-center justify-around px-2 py-2 shadow-[0_-3px_0px_0px_#000]">
+        <button onClick={() => scrollTo('section-kpi')} className="flex flex-col items-center gap-0.5 text-zinc-400 hover:text-purple-600 cursor-pointer transition-colors">
+          <DollarSign size={18} />
+          <span className="text-[9px] font-black uppercase">Overview</span>
+        </button>
+        <button onClick={() => scrollTo('section-chart')} className="flex flex-col items-center gap-0.5 text-zinc-400 hover:text-purple-600 cursor-pointer transition-colors">
+          <TrendingUp size={18} />
+          <span className="text-[9px] font-black uppercase">Revenue</span>
+        </button>
+        <button onClick={handleOpenAdd} className="flex flex-col items-center gap-0.5 cursor-pointer">
+          <div className="w-10 h-10 bg-purple-600 border-2 border-black rounded-xl flex items-center justify-center shadow-[2px_2px_0px_0px_#000] -mt-4">
+            <Plus size={18} className="text-white" />
+          </div>
+          <span className="text-[9px] font-black uppercase text-purple-600">Add</span>
+        </button>
+        <button onClick={() => setShowRecurringModal(true)} className="flex flex-col items-center gap-0.5 text-zinc-400 hover:text-purple-600 cursor-pointer transition-colors">
+          <Repeat size={18} />
+          <span className="text-[9px] font-black uppercase">Recurring</span>
+        </button>
+        <button onClick={() => scrollTo('section-forecast')} className="flex flex-col items-center gap-0.5 text-zinc-400 hover:text-purple-600 cursor-pointer transition-colors">
+          <LineChart size={18} />
+          <span className="text-[9px] font-black uppercase">Forecast</span>
+        </button>
+      </nav>
 
       {/* MODALS */}
       <AnimatePresence>
