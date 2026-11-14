@@ -5,13 +5,14 @@ import { Toaster } from 'sonner';
 const FinanceTracker = lazy(() => import('./pages/FinanceTracker'));
 
 const PageLoader = () => (
-  <div className="min-h-screen bg-[#FAF8FF] bg-brutalist-grid flex flex-col items-center justify-center text-zinc-900 p-6">
-    <div className="w-14 h-14 border-[3px] border-black bg-white rounded-2xl flex items-center justify-center shadow-[4px_4px_0px_0px_#000] mb-4 animate-bounce">
-      <div className="w-6 h-6 border-4 border-purple-600 border-t-transparent rounded-full animate-spin" />
+  <div className="min-h-screen bg-[#F8F9FD] flex flex-col items-center justify-center text-slate-900 p-6">
+    <div className="w-16 h-16 bg-white rounded-3xl flex items-center justify-center shadow-fintech border border-slate-100 mb-4 relative">
+      <div className="w-8 h-8 border-3 border-purple-600 border-t-transparent rounded-full animate-spin" />
     </div>
-    <p className="text-xs font-black tracking-widest text-purple-900 uppercase bg-purple-100 px-4 py-1.5 rounded-lg border-2 border-black shadow-[2px_2px_0px_0px_#000]">
-      BUILDICY FINANCE OPS
-    </p>
+    <div className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-50 text-purple-700 font-semibold text-xs border border-purple-100/80 shadow-fintech-xs">
+      <span className="w-2 h-2 rounded-full bg-purple-600 animate-pulse" />
+      <span>BUILDICY FINANCE OPS</span>
+    </div>
   </div>
 );
 
@@ -23,7 +24,7 @@ export default function App() {
         theme="light" 
         richColors 
         toastOptions={{
-          className: '!border-2 !border-black !shadow-[4px_4px_0px_0px_#000] !rounded-xl !font-bold',
+          className: '!rounded-2xl !border !border-slate-200/80 !shadow-fintech-lg !font-medium !text-xs !bg-white/95 !backdrop-blur-md',
         }}
       />
       <Suspense fallback={<PageLoader />}>

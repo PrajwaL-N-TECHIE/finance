@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=DM+Mono:wght@400;500&family=Syne:wght@700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800;900&family=DM+Mono:wght@400;500&family=Syne:wght@700;800;900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -11,9 +11,9 @@
 }
 
 body {
-  font-family: 'Inter', sans-serif;
-  background-color: #FAF8FF;
-  color: #09090b;
+  font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+  background-color: #F8F9FD;
+  color: #0F172A;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -22,58 +22,76 @@ body {
   color-scheme: light;
 }
 
-/* Brutalist Dot Pattern Background */
-.bg-brutalist-dots {
-  background-color: #FAF8FF;
-  background-image: radial-gradient(#cbd5e1 1.5px, transparent 1.5px);
-  background-size: 24px 24px;
-}
-
-/* Brutalist Grid Pattern Background */
-.bg-brutalist-grid {
-  background-color: #FAF8FF;
+/* Modern Soft Mesh Glows */
+.bg-fintech-canvas {
+  background-color: #F8F9FD;
   background-image: 
-    linear-gradient(to right, rgba(124, 58, 237, 0.06) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(124, 58, 237, 0.06) 1px, transparent 1px);
-  background-size: 28px 28px;
+    radial-gradient(at 0% 0%, rgba(124, 58, 237, 0.04) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(139, 92, 246, 0.05) 0px, transparent 50%),
+    radial-gradient(at 50% 100%, rgba(243, 232, 255, 0.5) 0px, transparent 50%);
 }
 
-/* Light Neobrutalist Scrollbar */
+/* Modern Card Shadows */
+.fintech-card {
+  background: #FFFFFF;
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.03), 0 2px 6px -1px rgba(15, 23, 42, 0.02);
+}
+
+.fintech-card-hover {
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.fintech-card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px -4px rgba(124, 58, 237, 0.08), 0 4px 12px -2px rgba(15, 23, 42, 0.03);
+}
+
+/* Glassmorphism accents */
+.glass-pill {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #F3E8FF;
-  border-left: 2px solid #000000;
+  background: #F1F5F9;
+  border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #7c3aed;
-  border: 2px solid #000000;
-  border-radius: 4px;
+  background: #CBD5E1;
+  border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #6d28d9;
+  background: #94A3B8;
 }
 
 .custom-scrollbar::-webkit-scrollbar {
-  width: 6px;
+  width: 5px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-track {
-  background: #F4F4F5;
-  border-radius: 4px;
+  background: transparent;
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background: #7c3aed;
-  border-radius: 4px;
+  background: #E2E8F0;
+  border-radius: 9999px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #CBD5E1;
 }
 
 ::selection {
-  background: #DDD6FE;
-  color: #581C87;
+  background: #EDE9FE;
+  color: #5B21B6;
 }
